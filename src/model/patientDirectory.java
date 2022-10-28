@@ -5,25 +5,43 @@
 package model;
 
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
 
 /**
  *
- * @author renuka
+ * @author visha_wb3uzfg
  */
-public class patientDirectory {
-    private ArrayList<patients> history;
-    
-    public patientDirectory(){
-            
-            this.history = new ArrayList<patients>();
+public class PatientDirectory extends PersonDirectory{
+
+    private List<Patient> patientDirectory = new ArrayList();
+
+    public List<Patient> getPatientDirectory() {
+        return patientDirectory;
     }
 
-    public ArrayList<patients> getHistory() {
-        return history;
+    public void setPatientDirectory(List<Patient> patientDirectory) {
+        this.patientDirectory = patientDirectory;
     }
 
-    public void setHistory(ArrayList<patients> history) {
-        this.history = history;
+    public Patient addPatient(String name, int age, String userName, String password, Role role, String address, String aptNo, String communityName,String cityName) {
+        Patient patient = new Patient(name, age, userName, password, role, address, aptNo, communityName, cityName);
+        this.patientDirectory.add(patient);
+//        this.addPerson(patient);
+//        
+        
+        return patient;
     }
-            
+
+    public void removePatient(String username) {
+        for (int i = 0; i < this.patientDirectory.size(); i++) {
+            Patient patient = this.patientDirectory.get(i);
+            if (patient.getuserName().equals(username)) {
+                this.patientDirectory.remove(i);
+                this.removePerson(username);
+                break;
+            }
+        }
+    }
+
 }
