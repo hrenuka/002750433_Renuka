@@ -5,6 +5,7 @@
 package ui;
 
 import java.util.List;
+import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 import model.Controller;
 import model.Hospital;
@@ -23,7 +24,9 @@ public class CommunityAdminRightAddHospital extends javax.swing.JPanel {
     public CommunityAdminRightAddHospital(Controller system) {
         initComponents();
         this.system = system;
-        populateTable(system);
+        HospitalDirectory hd= system.getHospitalDirectory();
+        List<Hospital> hospitals = hd.getHospitalList();
+        populateTable(hospitals);
     }
         
 
@@ -47,7 +50,9 @@ public class CommunityAdminRightAddHospital extends javax.swing.JPanel {
         jScrollPane1 = new javax.swing.JScrollPane();
         tblHospital = new javax.swing.JTable();
         btnAddHospitals = new javax.swing.JButton();
+        jButtonDeleteHospital = new javax.swing.JButton();
 
+        workArea.setBackground(new java.awt.Color(255, 204, 204));
         workArea.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0), 2));
 
         jLabel2.setText("Hospital Name : ");
@@ -64,7 +69,7 @@ public class CommunityAdminRightAddHospital extends javax.swing.JPanel {
                 {null, null, null}
             },
             new String [] {
-                "Hospital Name", "City", "Community Name"
+                "Hospital Name", "Community Name", "City"
             }
         ) {
             boolean[] canEdit = new boolean [] {
@@ -78,9 +83,18 @@ public class CommunityAdminRightAddHospital extends javax.swing.JPanel {
         jScrollPane1.setViewportView(tblHospital);
 
         btnAddHospitals.setText("Add Hospital");
+        btnAddHospitals.setBorder(javax.swing.BorderFactory.createEtchedBorder(java.awt.Color.cyan, java.awt.Color.gray));
         btnAddHospitals.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnAddHospitalsActionPerformed(evt);
+            }
+        });
+
+        jButtonDeleteHospital.setText("Delete Hospital");
+        jButtonDeleteHospital.setBorder(javax.swing.BorderFactory.createEtchedBorder(java.awt.Color.cyan, java.awt.Color.gray));
+        jButtonDeleteHospital.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonDeleteHospitalActionPerformed(evt);
             }
         });
 
@@ -91,55 +105,55 @@ public class CommunityAdminRightAddHospital extends javax.swing.JPanel {
             .addGroup(workAreaLayout.createSequentialGroup()
                 .addGroup(workAreaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(workAreaLayout.createSequentialGroup()
-                        .addGroup(workAreaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(workAreaLayout.createSequentialGroup()
-                                .addGap(308, 308, 308)
-                                .addComponent(jLabel3)
-                                .addGap(346, 346, 346))
-                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, workAreaLayout.createSequentialGroup()
-                                .addContainerGap()
-                                .addComponent(jLabel2)
-                                .addGap(18, 18, 18)))
-                        .addComponent(txtHospitalName, javax.swing.GroupLayout.PREFERRED_SIZE, 177, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(308, 308, 308)
+                        .addComponent(jLabel3))
                     .addGroup(workAreaLayout.createSequentialGroup()
-                        .addGap(524, 524, 524)
+                        .addContainerGap()
                         .addGroup(workAreaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(jLabel6)
-                            .addComponent(jLabel1))
-                        .addGap(18, 18, 18)
-                        .addGroup(workAreaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(txtCommunityName, javax.swing.GroupLayout.PREFERRED_SIZE, 177, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(txtCity, javax.swing.GroupLayout.PREFERRED_SIZE, 177, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                            .addGroup(workAreaLayout.createSequentialGroup()
+                                .addComponent(jLabel2)
+                                .addGap(18, 18, 18)
+                                .addComponent(txtHospitalName, javax.swing.GroupLayout.PREFERRED_SIZE, 177, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(workAreaLayout.createSequentialGroup()
+                                .addGroup(workAreaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                    .addComponent(jLabel6)
+                                    .addComponent(jLabel1))
+                                .addGap(18, 18, 18)
+                                .addGroup(workAreaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(txtCommunityName, javax.swing.GroupLayout.PREFERRED_SIZE, 177, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(txtCity, javax.swing.GroupLayout.PREFERRED_SIZE, 177, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                        .addGap(63, 63, 63)
+                        .addGroup(workAreaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(jButtonDeleteHospital, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(btnAddHospitals, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
                     .addGroup(workAreaLayout.createSequentialGroup()
-                        .addGap(343, 343, 343)
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(workAreaLayout.createSequentialGroup()
-                        .addGap(512, 512, 512)
-                        .addComponent(btnAddHospitals)))
-                .addContainerGap(571, Short.MAX_VALUE))
+                        .addContainerGap()
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 541, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(26, Short.MAX_VALUE))
         );
         workAreaLayout.setVerticalGroup(
             workAreaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(workAreaLayout.createSequentialGroup()
-                .addGap(199, 199, 199)
+                .addContainerGap()
+                .addComponent(jLabel3)
+                .addGap(31, 31, 31)
+                .addGroup(workAreaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(txtHospitalName, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel2)
+                    .addComponent(btnAddHospitals))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(workAreaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel3)
                     .addGroup(workAreaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                        .addComponent(txtHospitalName, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(jLabel2)))
-                .addGap(43, 43, 43)
-                .addGroup(workAreaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(txtCity, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(txtCity, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(jButtonDeleteHospital))
                     .addComponent(jLabel6))
-                .addGap(41, 41, 41)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(workAreaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(txtCommunityName, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel1))
-                .addGap(32, 32, 32)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 343, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(27, 27, 27)
-                .addComponent(btnAddHospitals)
-                .addContainerGap(312, Short.MAX_VALUE))
+                .addGap(18, 18, 18)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 454, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(24, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
@@ -153,10 +167,10 @@ public class CommunityAdminRightAddHospital extends javax.swing.JPanel {
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addGap(0, 0, Short.MAX_VALUE)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(workArea, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 0, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
 
@@ -165,19 +179,60 @@ public class CommunityAdminRightAddHospital extends javax.swing.JPanel {
         String name = txtHospitalName.getText();
         String city = txtCity.getText();
         String CommunityName = txtCommunityName.getText();
-        system.addHospital(name, city, CommunityName);
-        populateTable(system);
-        txtHospitalName.setText("");
-        txtCity.setText("");     
-        txtCommunityName.setText("");
+        int validate=validateInputFields(name,city,CommunityName);
+        if(validate == 1){
+            system.addHospital(name, city, CommunityName);
+            HospitalDirectory hd= system.getHospitalDirectory();
+            List<Hospital> hospitals = hd.getHospitalList();
+            populateTable(hospitals);
+            txtHospitalName.setText("");
+            txtCity.setText("");     
+            txtCommunityName.setText("");
+        }
     }//GEN-LAST:event_btnAddHospitalsActionPerformed
 
-void populateTable(Controller system){
+    private int validateInputFields(String name,String city,String CommunityName) {
+        //Function to validate the input fields
+        int validated=1;
+        
+        if(name == null || name.isEmpty()){
+            JOptionPane.showMessageDialog(this,"Hospital name cannot be empty.");
+            validated=0;
+        }
+        else if(city == null || city.isEmpty()){
+            JOptionPane.showMessageDialog(this,"City cannot be empty.");
+            validated=0;
+        }
+        else if(CommunityName == null || CommunityName.isEmpty()){
+            JOptionPane.showMessageDialog(this,"Community name cannot be empty.");
+            validated=0;
+        }
+        return validated;
+    }
+    private void jButtonDeleteHospitalActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonDeleteHospitalActionPerformed
+        // TODO add your handling code here:
+        
+        int selectedIndex=tblHospital.getSelectedRow();
+        if (selectedIndex >= 0){
+            HospitalDirectory hd= system.getHospitalDirectory();
+            List<Hospital> hospitals = hd.getHospitalList();
+            Hospital h= hospitals.get(selectedIndex);
+            String hospitalName=h.getName();
+            system.removeHospital(hospitalName);
+            hd= system.getHospitalDirectory();
+            hospitals = hd.getHospitalList();
+            populateTable(hospitals);
+            //populateTable();
+            JOptionPane.showMessageDialog(this, "Hospital record deleted");
+            
+            return;
+        }
+        JOptionPane.showMessageDialog(this, "Please select a row to delete");
+    }//GEN-LAST:event_jButtonDeleteHospitalActionPerformed
+
+void populateTable(List <Hospital> hospitals){
     DefaultTableModel model=(DefaultTableModel) tblHospital.getModel(); 
-    HospitalDirectory hd= system.getHospitalDirectory();
-    List<Hospital> hospitals = hd.getHospitalList();
     model.setRowCount(0);
-    
     for(Hospital h: hospitals){
         Object[] row = new Object[3];
         row[0] = h.getName();
@@ -191,6 +246,7 @@ void populateTable(Controller system){
 }
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnAddHospitals;
+    private javax.swing.JButton jButtonDeleteHospital;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;

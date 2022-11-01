@@ -4,6 +4,15 @@
  */
 package ui;
 
+import java.util.List;
+import javax.swing.JOptionPane;
+import javax.swing.table.DefaultTableModel;
+import model.Controller;
+import model.Encounter;
+import model.EncounterRecords;
+import model.Person;
+import model.VitalRecord;
+
 /**
  *
  * @author kb282
@@ -13,8 +22,14 @@ public class PatientRightViewEncounter extends javax.swing.JPanel {
     /**
      * Creates new form PatientLeftPanel
      */
-    public PatientRightViewEncounter() {
+    Person person;
+    Controller system;
+    public PatientRightViewEncounter(Controller system,Person person) {
         initComponents();
+        this.person=person;
+        this.system=system;
+        List <Encounter> encounter= system.searchEncountersByPatient(null, person.getName());
+        populateTable(encounter);
     }
 
     /**
@@ -26,51 +41,126 @@ public class PatientRightViewEncounter extends javax.swing.JPanel {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jScrollPane2 = new javax.swing.JScrollPane();
-        jTable2 = new javax.swing.JTable();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        jTableViewHistory = new javax.swing.JTable();
+        jLabel28 = new javax.swing.JLabel();
+        PatientSearchDoctorName = new javax.swing.JTextField();
+        btnView_Search = new javax.swing.JButton();
+        jLabel2 = new javax.swing.JLabel();
 
-        jTable2.setModel(new javax.swing.table.DefaultTableModel(
+        setBackground(new java.awt.Color(255, 204, 204));
+
+        jTableViewHistory.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null}
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null}
             },
             new String [] {
-                "Sr No", "Patient Name", "Medical History", "Alergy"
+                "Patient Name", "Doctor Name", "Heartrate", "Temperature", "Allergies"
             }
         ) {
             boolean[] canEdit = new boolean [] {
-                false, true, true, true
+                false, false, false, false, false
             };
 
             public boolean isCellEditable(int rowIndex, int columnIndex) {
                 return canEdit [columnIndex];
             }
         });
-        jScrollPane2.setViewportView(jTable2);
+        jScrollPane1.setViewportView(jTableViewHistory);
+
+        jLabel28.setFont(new java.awt.Font("Rockwell", 0, 13)); // NOI18N
+        jLabel28.setText("Doctor Name : ");
+
+        PatientSearchDoctorName.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                PatientSearchDoctorNameActionPerformed(evt);
+            }
+        });
+
+        btnView_Search.setFont(new java.awt.Font("Rockwell", 0, 13)); // NOI18N
+        btnView_Search.setText("Search");
+        btnView_Search.setBorder(javax.swing.BorderFactory.createEtchedBorder(java.awt.Color.cyan, java.awt.Color.gray));
+        btnView_Search.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnView_SearchActionPerformed(evt);
+            }
+        });
+
+        jLabel2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/ui/prescription.png"))); // NOI18N
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(0, 0, Short.MAX_VALUE)
-                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 0, Short.MAX_VALUE))
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 439, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addComponent(jLabel28)
+                .addGap(23, 23, 23)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(PatientSearchDoctorName, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnView_Search, javax.swing.GroupLayout.PREFERRED_SIZE, 102, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 102, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(51, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(jScrollPane1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 508, Short.MAX_VALUE)
             .addGroup(layout.createSequentialGroup()
-                .addGap(0, 0, Short.MAX_VALUE)
-                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 0, Short.MAX_VALUE))
+                .addGap(36, 36, 36)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel28, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(PatientSearchDoctorName, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(btnView_Search)
+                .addGap(121, 121, 121)
+                .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 85, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
 
+    private void PatientSearchDoctorNameActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_PatientSearchDoctorNameActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_PatientSearchDoctorNameActionPerformed
+
+    private void btnView_SearchActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnView_SearchActionPerformed
+        // TODO add your handling code here:
+        String name= PatientSearchDoctorName.getText();
+        if (name == null || name.isEmpty()){
+            JOptionPane.showMessageDialog(this,"Doctor name cannot be empty.");
+            return;
+        }
+        List <Encounter> encounter= system.searchEncountersByPatient(name, person.getName());
+        populateTable(encounter);
+
+    }//GEN-LAST:event_btnView_SearchActionPerformed
+    
+     void populateTable(List <Encounter> encounter){
+    DefaultTableModel model=(DefaultTableModel) jTableViewHistory.getModel(); 
+    model.setRowCount(0);
+    for(Encounter e: encounter){
+        VitalRecord vr= e.getVital();
+        Object[] row = new Object[5];
+        row[0] = e.getPatientUsername();
+        row[1] = e.getDoctorUsername();
+        row[2] = vr.getHeartrate();
+        row[3] = vr.getTemperature();
+        row[4] = vr.getAllergies();
+        model.addRow(row);
+    }
+   
+    
+}
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JScrollPane jScrollPane2;
-    private javax.swing.JTable jTable2;
+    private javax.swing.JTextField PatientSearchDoctorName;
+    private javax.swing.JButton btnView_Search;
+    private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel28;
+    private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JTable jTableViewHistory;
     // End of variables declaration//GEN-END:variables
 }

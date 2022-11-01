@@ -4,6 +4,16 @@
  */
 package ui;
 
+import java.util.List;
+import javax.swing.JOptionPane;
+import javax.swing.table.DefaultTableModel;
+import model.Controller;
+import model.Encounter;
+import model.Hospital;
+import model.HospitalDirectory;
+import model.Person;
+import model.VitalRecord;
+
 /**
  *
  * @author kb282
@@ -13,8 +23,15 @@ public class PatientRightSearchHospital extends javax.swing.JPanel {
     /**
      * Creates new form PatientJplane
      */
-    public PatientRightSearchHospital() {
+    Person person;
+    Controller system;
+    public PatientRightSearchHospital(Controller system, Person person) {
         initComponents();
+        this.person=person;
+        this.system=system;
+        HospitalDirectory hd=system.getHospitalDirectory();
+        List <Hospital> hospital = hd.getHospitalList();
+        populateTable(hospital);
     }
 
     /**
@@ -27,121 +44,151 @@ public class PatientRightSearchHospital extends javax.swing.JPanel {
     private void initComponents() {
 
         jScrollPane1 = new javax.swing.JScrollPane();
-        jTable1 = new javax.swing.JTable();
+        jTableHospital = new javax.swing.JTable();
         BtnSearch = new javax.swing.JButton();
-        First_Name_TextField1 = new javax.swing.JTextField();
+        patientSearchCommunityName = new javax.swing.JTextField();
         jLabel27 = new javax.swing.JLabel();
-        First_Name_TextField2 = new javax.swing.JTextField();
+        patientSearchCity = new javax.swing.JTextField();
         jLabel28 = new javax.swing.JLabel();
 
-        jTable1.setModel(new javax.swing.table.DefaultTableModel(
+        setBackground(new java.awt.Color(255, 204, 204));
+
+        jTableHospital.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null}
+                {null, null, null},
+                {null, null, null},
+                {null, null, null},
+                {null, null, null}
             },
             new String [] {
-                "Sr no", "City", "Community", "Hospital"
+                "Name", "City", "Community"
             }
         ) {
             boolean[] canEdit = new boolean [] {
-                false, false, true, false
+                false, false, false
             };
 
             public boolean isCellEditable(int rowIndex, int columnIndex) {
                 return canEdit [columnIndex];
             }
         });
-        jScrollPane1.setViewportView(jTable1);
+        jScrollPane1.setViewportView(jTableHospital);
+        if (jTableHospital.getColumnModel().getColumnCount() > 0) {
+            jTableHospital.getColumnModel().getColumn(2).setResizable(false);
+        }
 
         BtnSearch.setText("Search ");
+        BtnSearch.setBorder(javax.swing.BorderFactory.createEtchedBorder(java.awt.Color.cyan, java.awt.Color.gray));
         BtnSearch.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 BtnSearchActionPerformed(evt);
             }
         });
 
-        First_Name_TextField1.addActionListener(new java.awt.event.ActionListener() {
+        patientSearchCommunityName.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                First_Name_TextField1ActionPerformed(evt);
+                patientSearchCommunityNameActionPerformed(evt);
             }
         });
 
         jLabel27.setFont(new java.awt.Font("Rockwell", 0, 13)); // NOI18N
-        jLabel27.setText("Community Name");
+        jLabel27.setText("Community Name :");
 
-        First_Name_TextField2.addActionListener(new java.awt.event.ActionListener() {
+        patientSearchCity.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                First_Name_TextField2ActionPerformed(evt);
+                patientSearchCityActionPerformed(evt);
             }
         });
 
         jLabel28.setFont(new java.awt.Font("Rockwell", 0, 13)); // NOI18N
-        jLabel28.setText("City");
+        jLabel28.setText("City :");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+            .addGroup(layout.createSequentialGroup()
                 .addGap(19, 19, 19)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 349, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 743, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                             .addComponent(jLabel27)
                             .addComponent(jLabel28))
                         .addGap(40, 40, 40)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(First_Name_TextField1, javax.swing.GroupLayout.DEFAULT_SIZE, 116, Short.MAX_VALUE)
-                            .addComponent(First_Name_TextField2))
-                        .addGap(0, 302, Short.MAX_VALUE)))
-                .addGap(32, 32, 32))
-            .addGroup(layout.createSequentialGroup()
-                .addGap(132, 132, 132)
-                .addComponent(BtnSearch)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                            .addComponent(patientSearchCity, javax.swing.GroupLayout.DEFAULT_SIZE, 143, Short.MAX_VALUE)
+                            .addComponent(patientSearchCommunityName)
+                            .addComponent(BtnSearch, javax.swing.GroupLayout.PREFERRED_SIZE, 63, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                .addContainerGap(18, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 168, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(34, 34, 34)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(First_Name_TextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel27))
+                .addGap(22, 22, 22)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 262, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(patientSearchCommunityName)
+                    .addComponent(jLabel27, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(First_Name_TextField2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel28))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 95, Short.MAX_VALUE)
+                    .addComponent(patientSearchCity, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel28, javax.swing.GroupLayout.DEFAULT_SIZE, 23, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(BtnSearch)
-                .addContainerGap())
+                .addGap(143, 143, 143))
         );
     }// </editor-fold>//GEN-END:initComponents
 
-    private void First_Name_TextField1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_First_Name_TextField1ActionPerformed
+    private void patientSearchCommunityNameActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_patientSearchCommunityNameActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_First_Name_TextField1ActionPerformed
+    }//GEN-LAST:event_patientSearchCommunityNameActionPerformed
 
     private void BtnSearchActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnSearchActionPerformed
         // TODO add your handling code here:
+        String cityName=patientSearchCity.getText();
+        String communityName=patientSearchCommunityName.getText();
+        if(cityName.isEmpty() && communityName.isEmpty()){
+            JOptionPane.showMessageDialog(this,"Community name and city name cannot be empty.");
+            return;
+        }
+        if (cityName.isEmpty()){
+            cityName=null;
+        }
+        if (communityName.isEmpty()){
+            communityName=null;
+        }
+            List <Hospital> hospital = system.searchHospital(communityName, cityName);
+            populateTable(hospital);
+        
     }//GEN-LAST:event_BtnSearchActionPerformed
 
-    private void First_Name_TextField2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_First_Name_TextField2ActionPerformed
+    private void patientSearchCityActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_patientSearchCityActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_First_Name_TextField2ActionPerformed
+    }//GEN-LAST:event_patientSearchCityActionPerformed
 
 
+     void populateTable(List <Hospital> hospital){
+    DefaultTableModel model=(DefaultTableModel) jTableHospital.getModel(); 
+    model.setRowCount(0);
+    for(Hospital h: hospital){
+        Object[] row = new Object[3];
+        row[0] = h.getName();
+        row[1] = h.getCity();
+        row[2] = h.getCommunityName();
+        model.addRow(row);
+    }
+   
+    
+}
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton BtnSearch;
-    private javax.swing.JTextField First_Name_TextField1;
-    private javax.swing.JTextField First_Name_TextField2;
     private javax.swing.JLabel jLabel27;
     private javax.swing.JLabel jLabel28;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTable jTable1;
+    private javax.swing.JTable jTableHospital;
+    private javax.swing.JTextField patientSearchCity;
+    private javax.swing.JTextField patientSearchCommunityName;
     // End of variables declaration//GEN-END:variables
 }

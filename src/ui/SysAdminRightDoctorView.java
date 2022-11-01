@@ -4,6 +4,14 @@
  */
 package ui;
 
+import java.util.List;
+import javax.swing.table.DefaultTableModel;
+import model.Controller;
+import model.Doctor;
+import model.DoctorDirectory;
+import model.Hospital;
+import model.House;
+
 /**
  *
  * @author HP
@@ -13,8 +21,15 @@ public class SysAdminRightDoctorView extends javax.swing.JPanel {
     /**
      * Creates new form AdminDoctor
      */
-    public SysAdminRightDoctorView() {
+    Controller system;
+    public SysAdminRightDoctorView(Controller system) {
         initComponents();
+        this.system=system;
+        DoctorDirectory dd=system.getDoctorDirectory();
+        List <Doctor> doctor=dd.getDoctorDirectory();
+        populateTable(doctor);
+        
+        
     }
 
     /**
@@ -27,50 +42,44 @@ public class SysAdminRightDoctorView extends javax.swing.JPanel {
     private void initComponents() {
 
         jPanel1 = new javax.swing.JPanel();
-        jButton2 = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
-        jTable1 = new javax.swing.JTable();
+        jTableViewHospital = new javax.swing.JTable();
 
-        jPanel1.setBackground(new java.awt.Color(204, 255, 204));
-
-        jButton2.setBackground(new java.awt.Color(0, 0, 0));
-        jButton2.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
-        jButton2.setForeground(new java.awt.Color(255, 255, 255));
-        jButton2.setText("View Doctor");
-
-        jTable1.setModel(new javax.swing.table.DefaultTableModel(
+        jTableViewHospital.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null},
-                {null, null, null},
-                {null, null, null},
-                {null, null, null}
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null}
             },
             new String [] {
-                "Name", "Contact no.", "Hospital"
+                "Name", "Community ", "Hospital", "City"
             }
-        ));
-        jScrollPane1.setViewportView(jTable1);
+        ) {
+            boolean[] canEdit = new boolean [] {
+                false, false, false, false
+            };
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
+        jScrollPane1.setViewportView(jTableViewHospital);
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(38, 38, 38)
-                .addComponent(jButton2)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-            .addGroup(jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 662, Short.MAX_VALUE)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 813, Short.MAX_VALUE)
                 .addContainerGap())
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(45, 45, 45)
-                .addComponent(jButton2)
-                .addGap(18, 18, 18)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 342, Short.MAX_VALUE)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                .addContainerGap(21, Short.MAX_VALUE)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 407, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
         );
 
@@ -78,7 +87,7 @@ public class SysAdminRightDoctorView extends javax.swing.JPanel {
         this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 674, Short.MAX_VALUE)
+            .addGap(0, 825, Short.MAX_VALUE)
             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addComponent(jPanel1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
@@ -94,9 +103,22 @@ public class SysAdminRightDoctorView extends javax.swing.JPanel {
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jButton2;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTable jTable1;
+    private javax.swing.JTable jTableViewHospital;
     // End of variables declaration//GEN-END:variables
+
+    void populateTable(List <Doctor> doctor){
+    DefaultTableModel model=(DefaultTableModel) jTableViewHospital.getModel(); 
+    model.setRowCount(0);
+    for(Doctor d: doctor){
+        Object[] row = new Object[4];
+        House h=d.getHouse();
+        row[0] = d.getName();
+        row[1] = h.getCommunityName();
+        row[2] = d.getHospital().getName();
+        row[3] = h.getCity();
+        model.addRow(row);
+    }
+}
 }

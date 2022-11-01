@@ -14,6 +14,7 @@ import java.util.List;
 public class HospitalDirectory {
 
     private List<Hospital> hospitalList = new ArrayList<>();
+    public List<Hospital> get;
 
     public List<Hospital> getHospitalList() {
         return hospitalList;
@@ -27,7 +28,8 @@ public class HospitalDirectory {
         Hospital hospital = new Hospital(name, community, city);
         this.hospitalList.add(hospital);
     }
-
+    
+    
     public Hospital searchHospitalByName(String name) {
 //        List<Hospital> resultHospital = new ArrayList<>();
         for (int i = 0; i < this.hospitalList.size(); i++) {
@@ -50,8 +52,20 @@ public class HospitalDirectory {
         return resultHospital;
 
     }
+    public List<Hospital> searchHospitalByAll(String communityName, String cityName) {
+        List<Hospital> resultHospital = new ArrayList<>();
+        for (int i = 0; i < this.hospitalList.size(); i++) {
+            Hospital h = this.hospitalList.get(i);
+            if (h.getCommunityName().equals(communityName)) {
+                if (h.getCity().equals(cityName)) {
+                    resultHospital.add(h);
+                }
+            }
+        }
+        return resultHospital;
 
-    public List<Hospital> searchHospitalByComunity(String name) {
+    }
+        public List<Hospital> searchHospitalByComunity(String name) {
         List<Hospital> resultHospital = new ArrayList<>();
         for (int i = 0; i < this.hospitalList.size(); i++) {
             Hospital h = this.hospitalList.get(i);

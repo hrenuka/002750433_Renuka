@@ -4,6 +4,18 @@
  */
 package ui;
 
+import java.util.List;
+import javax.swing.JOptionPane;
+import javax.swing.table.DefaultTableModel;
+import model.Controller;
+import model.Encounter;
+import model.Hospital;
+import model.HospitalDirectory;
+import model.Patient;
+import model.PatientDirectory;
+import model.Person;
+import model.VitalRecord;
+
 /**
  *
  * @author anujkumar
@@ -13,8 +25,14 @@ public class DoctorRightViewPatientHistory extends javax.swing.JPanel {
     /**
      * Creates new form ViewDoctorJpanel
      */
-    public DoctorRightViewPatientHistory() {
+    Controller system;
+    Person person;
+    public DoctorRightViewPatientHistory(Controller system,Person person) {
         initComponents();
+        this.system=system;
+        this.person=person;
+         List<Encounter> encounter= system.searchEncountersByDoctor(person.getuserName());
+         populateTable(encounter);
     }
 
     /**
@@ -26,190 +44,147 @@ public class DoctorRightViewPatientHistory extends javax.swing.JPanel {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        btnView_View = new javax.swing.JButton();
-        btn_Update_View = new javax.swing.JButton();
-        btn_Delete_View = new javax.swing.JButton();
+        btnView_Search = new javax.swing.JButton();
         jLabel28 = new javax.swing.JLabel();
-        DoctorView = new javax.swing.JTextField();
-        CityNameView = new javax.swing.JTextField();
-        jLabel29 = new javax.swing.JLabel();
-        jLabel30 = new javax.swing.JLabel();
+        DoctorSearchPatientName = new javax.swing.JTextField();
         jLabel19 = new javax.swing.JLabel();
-        CommunityView = new javax.swing.JTextField();
         jScrollPane1 = new javax.swing.JScrollPane();
-        jTable1 = new javax.swing.JTable();
+        jTableViewHistory = new javax.swing.JTable();
+        jLabel2 = new javax.swing.JLabel();
 
-        btnView_View.setFont(new java.awt.Font("Rockwell", 0, 13)); // NOI18N
-        btnView_View.setText("View");
-        btnView_View.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnView_ViewActionPerformed(evt);
-            }
-        });
+        setBackground(new java.awt.Color(255, 204, 204));
 
-        btn_Update_View.setFont(new java.awt.Font("Rockwell", 0, 13)); // NOI18N
-        btn_Update_View.setText("Update ");
-        btn_Update_View.addActionListener(new java.awt.event.ActionListener() {
+        btnView_Search.setFont(new java.awt.Font("Rockwell", 0, 13)); // NOI18N
+        btnView_Search.setText("Search");
+        btnView_Search.setBorder(javax.swing.BorderFactory.createEtchedBorder(java.awt.Color.cyan, java.awt.Color.gray));
+        btnView_Search.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btn_Update_ViewActionPerformed(evt);
-            }
-        });
-
-        btn_Delete_View.setFont(new java.awt.Font("Rockwell", 0, 13)); // NOI18N
-        btn_Delete_View.setText("Delete");
-        btn_Delete_View.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btn_Delete_ViewActionPerformed(evt);
+                btnView_SearchActionPerformed(evt);
             }
         });
 
         jLabel28.setFont(new java.awt.Font("Rockwell", 0, 13)); // NOI18N
         jLabel28.setText("Patient Name : ");
+        jLabel28.setBorder(javax.swing.BorderFactory.createEtchedBorder(java.awt.Color.cyan, java.awt.Color.gray));
 
-        DoctorView.addActionListener(new java.awt.event.ActionListener() {
+        DoctorSearchPatientName.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                DoctorViewActionPerformed(evt);
+                DoctorSearchPatientNameActionPerformed(evt);
             }
         });
-
-        CityNameView.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                CityNameViewActionPerformed(evt);
-            }
-        });
-
-        jLabel29.setFont(new java.awt.Font("Rockwell", 0, 13)); // NOI18N
-        jLabel29.setText("City  Name : ");
-
-        jLabel30.setFont(new java.awt.Font("Rockwell", 0, 13)); // NOI18N
-        jLabel30.setText("Community Name :");
 
         jLabel19.setFont(new java.awt.Font("Rockwell", 0, 24)); // NOI18N
-        jLabel19.setText("View ");
+        jLabel19.setText("View Patient ");
 
-        CommunityView.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                CommunityViewActionPerformed(evt);
-            }
-        });
-
-        jTable1.setModel(new javax.swing.table.DefaultTableModel(
+        jTableViewHistory.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null}
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null}
             },
             new String [] {
-                "Sr no", "Hospital Name", "Address", "Status"
+                "Patient Name", "Doctor Name", "Heartrate", "Temperature", "Allergies"
             }
         ) {
             boolean[] canEdit = new boolean [] {
-                false, true, false, false
+                false, false, false, false, false
             };
 
             public boolean isCellEditable(int rowIndex, int columnIndex) {
                 return canEdit [columnIndex];
             }
         });
-        jScrollPane1.setViewportView(jTable1);
+        jScrollPane1.setViewportView(jTableViewHistory);
+
+        jLabel2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/ui/examination (3).png"))); // NOI18N
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
+                .addGap(0, 0, Short.MAX_VALUE)
+                .addComponent(btnView_Search, javax.swing.GroupLayout.PREFERRED_SIZE, 102, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(50, 50, 50))
+            .addGroup(layout.createSequentialGroup()
+                .addGap(17, 17, 17)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 757, Short.MAX_VALUE)
+                .addContainerGap())
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(197, 197, 197)
-                        .addComponent(jLabel19, javax.swing.GroupLayout.PREFERRED_SIZE, 76, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 387, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(27, 27, 27)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel28)
-                            .addComponent(jLabel29, javax.swing.GroupLayout.PREFERRED_SIZE, 78, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel30, javax.swing.GroupLayout.PREFERRED_SIZE, 112, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(10, 10, 10)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(CityNameView, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(DoctorView, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(CommunityView, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                    .addGroup(layout.createSequentialGroup()
-                        .addContainerGap()
-                        .addComponent(btnView_View, javax.swing.GroupLayout.PREFERRED_SIZE, 102, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(27, 27, 27)
-                        .addComponent(btn_Update_View, javax.swing.GroupLayout.PREFERRED_SIZE, 107, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(27, 27, 27)
-                        .addComponent(btn_Delete_View, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addComponent(jLabel28)
+                        .addGap(18, 18, 18)
+                        .addComponent(DoctorSearchPatientName, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(20, 20, 20))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addComponent(jLabel2)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jLabel19)
+                        .addGap(309, 309, 309))))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jLabel19, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 152, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jLabel28)
-                            .addComponent(DoctorView, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jLabel29)
-                            .addComponent(CityNameView, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(18, 18, 18)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jLabel30)
-                            .addComponent(CommunityView, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                .addGap(26, 26, 26)
+                .addGap(13, 13, 13)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(jLabel19, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel2))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 60, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(btnView_View, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btn_Update_View, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btn_Delete_View, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(66, Short.MAX_VALUE))
+                    .addComponent(DoctorSearchPatientName, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel28, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
+                .addComponent(btnView_Search, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(28, 28, 28)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 152, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(51, 51, 51))
         );
     }// </editor-fold>//GEN-END:initComponents
 
-    private void btnView_ViewActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnView_ViewActionPerformed
+    private void btnView_SearchActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnView_SearchActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_btnView_ViewActionPerformed
-
-    private void btn_Update_ViewActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_Update_ViewActionPerformed
+        String name= DoctorSearchPatientName.getText();
+        if (name.isEmpty() || name == null){
+            JOptionPane.showMessageDialog(this,"Name cannot be empty.");
+            return;
+        }
+        System.out.println("Doctor username"+person.getuserName());
+        List <Encounter> encounter = system.searchEncountersByPatient(person.getuserName(),name);
+        populateTable(encounter);
+        
+    }//GEN-LAST:event_btnView_SearchActionPerformed
+    
+    private void DoctorSearchPatientNameActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_DoctorSearchPatientNameActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_btn_Update_ViewActionPerformed
+    }//GEN-LAST:event_DoctorSearchPatientNameActionPerformed
 
-    private void btn_Delete_ViewActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_Delete_ViewActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_btn_Delete_ViewActionPerformed
-
-    private void DoctorViewActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_DoctorViewActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_DoctorViewActionPerformed
-
-    private void CityNameViewActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_CityNameViewActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_CityNameViewActionPerformed
-
-    private void CommunityViewActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_CommunityViewActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_CommunityViewActionPerformed
-
+    void populateTable(List <Encounter> encounter){
+    DefaultTableModel model=(DefaultTableModel) jTableViewHistory.getModel(); 
+    model.setRowCount(0);
+    for(Encounter e: encounter){
+        VitalRecord vr= e.getVital();
+        Object[] row = new Object[5];
+        row[0] = e.getPatientUsername();
+        row[1] = e.getDoctorUsername();
+        row[2] = vr.getHeartrate();
+        row[3] = vr.getTemperature();
+        row[4] = vr.getAllergies();
+        model.addRow(row);
+    }
+   
+    
+}
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JTextField CityNameView;
-    private javax.swing.JTextField CommunityView;
-    private javax.swing.JTextField DoctorView;
-    private javax.swing.JButton btnView_View;
-    private javax.swing.JButton btn_Delete_View;
-    private javax.swing.JButton btn_Update_View;
+    private javax.swing.JTextField DoctorSearchPatientName;
+    private javax.swing.JButton btnView_Search;
     private javax.swing.JLabel jLabel19;
+    private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel28;
-    private javax.swing.JLabel jLabel29;
-    private javax.swing.JLabel jLabel30;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTable jTable1;
+    private javax.swing.JTable jTableViewHistory;
     // End of variables declaration//GEN-END:variables
 }

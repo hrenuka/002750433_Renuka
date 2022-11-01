@@ -6,7 +6,7 @@ package model;
 
 /**
  *
- * @author renuka
+ * @author anujkumar
  */
 public class City {
 

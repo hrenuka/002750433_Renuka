@@ -1,6 +1,11 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 
 <Form version="1.3" maxVersion="1.9" type="org.netbeans.modules.form.forminfo.JPanelFormInfo">
+  <Properties>
+    <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+      <Color blue="cc" green="cc" red="ff" type="rgb"/>
+    </Property>
+  </Properties>
   <AuxValues>
     <AuxValue name="FormSettings_autoResourcing" type="java.lang.Integer" value="0"/>
     <AuxValue name="FormSettings_autoSetComponentName" type="java.lang.Boolean" value="false"/>
@@ -17,19 +22,17 @@
     <DimensionLayout dim="0">
       <Group type="103" groupAlignment="0" attributes="0">
           <Group type="102" alignment="0" attributes="0">
-              <Component id="Submit_Button_Patient_History" min="-2" pref="825" max="-2" attributes="0"/>
-              <EmptySpace max="-2" attributes="0"/>
-              <Component id="jSeparator16" pref="13" max="32767" attributes="0"/>
+              <EmptySpace min="-2" pref="831" max="-2" attributes="0"/>
+              <Component id="jSeparator16" pref="44" max="32767" attributes="0"/>
           </Group>
           <Group type="102" attributes="0">
               <Group type="103" groupAlignment="0" attributes="0">
                   <Component id="jSeparator13" max="32767" attributes="0"/>
                   <Group type="102" alignment="0" attributes="0">
-                      <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
+                      <EmptySpace max="-2" attributes="0"/>
                       <Component id="jLabel47" min="-2" max="-2" attributes="0"/>
-                      <EmptySpace type="separate" max="-2" attributes="0"/>
-                      <Component id="Med_Records_Patient_History" min="-2" pref="700" max="-2" attributes="0"/>
-                      <EmptySpace min="-2" pref="8" max="-2" attributes="0"/>
+                      <EmptySpace max="-2" attributes="0"/>
+                      <Component id="txtRemarks" min="-2" pref="512" max="-2" attributes="0"/>
                   </Group>
                   <Group type="102" attributes="0">
                       <EmptySpace max="-2" attributes="0"/>
@@ -37,13 +40,12 @@
                           <Component id="jSeparator12" alignment="1" max="32767" attributes="0"/>
                           <Group type="102" attributes="0">
                               <Group type="103" groupAlignment="0" attributes="0">
-                                  <Component id="jLabel27" alignment="0" min="-2" max="-2" attributes="0"/>
-                                  <Component id="jLabel45" alignment="0" min="-2" max="-2" attributes="0"/>
+                                  <Component id="jLabel45" min="-2" max="-2" attributes="0"/>
                                   <Group type="102" alignment="0" attributes="0">
                                       <EmptySpace min="6" pref="6" max="-2" attributes="0"/>
                                       <Component id="jLabel28" min="-2" max="-2" attributes="0"/>
-                                      <EmptySpace min="-2" pref="35" max="-2" attributes="0"/>
-                                      <Component id="PatientNameList" min="-2" pref="189" max="-2" attributes="0"/>
+                                      <EmptySpace min="-2" pref="20" max="-2" attributes="0"/>
+                                      <Component id="choicePatientName" min="-2" pref="149" max="-2" attributes="0"/>
                                   </Group>
                               </Group>
                               <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
@@ -51,81 +53,90 @@
                       </Group>
                   </Group>
                   <Component id="jSeparator14" alignment="0" max="32767" attributes="0"/>
-                  <Component id="jSeparator5" alignment="0" max="32767" attributes="0"/>
+                  <Group type="102" alignment="0" attributes="0">
+                      <EmptySpace min="-2" pref="277" max="-2" attributes="0"/>
+                      <Component id="jLabel19" min="-2" max="-2" attributes="0"/>
+                      <EmptySpace type="separate" max="-2" attributes="0"/>
+                      <Component id="jSeparator5" max="32767" attributes="0"/>
+                  </Group>
               </Group>
               <EmptySpace max="-2" attributes="0"/>
           </Group>
           <Group type="102" attributes="0">
               <EmptySpace max="-2" attributes="0"/>
-              <Component id="jLabel48" min="-2" max="-2" attributes="0"/>
-              <EmptySpace max="-2" attributes="0"/>
-              <Component id="Allergy1__Patient_History" min="-2" pref="150" max="-2" attributes="0"/>
-              <EmptySpace min="-2" pref="26" max="-2" attributes="0"/>
-              <Component id="jLabel49" min="-2" max="-2" attributes="0"/>
-              <EmptySpace type="separate" max="-2" attributes="0"/>
-              <Component id="Allergy2_Patient_History" min="-2" pref="150" max="-2" attributes="0"/>
-              <EmptySpace type="unrelated" max="-2" attributes="0"/>
-              <Component id="jLabel50" min="-2" max="-2" attributes="0"/>
-              <EmptySpace type="separate" max="-2" attributes="0"/>
-              <Component id="Allergy3_Patient_History" min="-2" pref="150" max="-2" attributes="0"/>
-              <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
-          </Group>
-          <Group type="103" rootIndex="1" groupAlignment="0" attributes="0">
-              <Group type="102" attributes="0">
-                  <EmptySpace min="-2" pref="270" max="-2" attributes="0"/>
-                  <Component id="jLabel19" min="-2" max="-2" attributes="0"/>
-                  <EmptySpace pref="309" max="32767" attributes="0"/>
+              <Group type="103" groupAlignment="0" attributes="0">
+                  <Component id="jLabel49" alignment="0" min="-2" max="-2" attributes="0"/>
+                  <Component id="jLabel48" alignment="0" min="-2" max="-2" attributes="0"/>
               </Group>
+              <EmptySpace type="separate" max="-2" attributes="0"/>
+              <Group type="103" groupAlignment="0" attributes="0">
+                  <Group type="102" attributes="0">
+                      <Component id="txtAllergy" min="-2" pref="150" max="-2" attributes="0"/>
+                      <EmptySpace min="-2" pref="63" max="-2" attributes="0"/>
+                      <Component id="jLabel50" min="-2" max="-2" attributes="0"/>
+                      <EmptySpace type="separate" max="-2" attributes="0"/>
+                      <Component id="txtTemp" min="-2" pref="150" max="-2" attributes="0"/>
+                  </Group>
+                  <Group type="102" attributes="0">
+                      <Component id="txtHeartrate" min="-2" pref="150" max="-2" attributes="0"/>
+                      <EmptySpace min="-2" pref="120" max="-2" attributes="0"/>
+                      <Component id="Submit_Button_Patient_History" min="-2" pref="111" max="-2" attributes="0"/>
+                  </Group>
+              </Group>
+              <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
           </Group>
       </Group>
     </DimensionLayout>
     <DimensionLayout dim="1">
       <Group type="103" groupAlignment="0" attributes="0">
           <Group type="102" alignment="0" attributes="0">
-              <EmptySpace min="-2" pref="36" max="-2" attributes="0"/>
-              <Component id="jSeparator5" min="-2" pref="10" max="-2" attributes="0"/>
-              <EmptySpace max="-2" attributes="0"/>
-              <Component id="jLabel27" min="-2" max="-2" attributes="0"/>
-              <EmptySpace max="-2" attributes="0"/>
-              <Component id="jSeparator12" min="-2" pref="22" max="-2" attributes="0"/>
-              <EmptySpace type="unrelated" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="0" attributes="0">
-                  <Component id="jLabel28" min="-2" max="-2" attributes="0"/>
-                  <Component id="PatientNameList" min="-2" pref="22" max="-2" attributes="0"/>
+                  <Group type="102" attributes="0">
+                      <EmptySpace min="-2" pref="36" max="-2" attributes="0"/>
+                      <Component id="jSeparator5" min="-2" pref="10" max="-2" attributes="0"/>
+                      <EmptySpace min="-2" pref="28" max="-2" attributes="0"/>
+                  </Group>
+                  <Group type="102" alignment="1" attributes="0">
+                      <EmptySpace max="-2" attributes="0"/>
+                      <Component id="jLabel19" min="-2" pref="40" max="-2" attributes="0"/>
+                      <EmptySpace type="separate" max="-2" attributes="0"/>
+                  </Group>
               </Group>
-              <EmptySpace type="unrelated" max="-2" attributes="0"/>
+              <Component id="jSeparator12" min="-2" pref="22" max="-2" attributes="0"/>
+              <EmptySpace max="-2" attributes="0"/>
+              <Group type="103" groupAlignment="0" attributes="0">
+                  <Component id="choicePatientName" min="-2" max="-2" attributes="0"/>
+                  <Component id="jLabel28" min="-2" pref="28" max="-2" attributes="0"/>
+              </Group>
+              <EmptySpace pref="40" max="32767" attributes="0"/>
               <Component id="jSeparator13" min="-2" max="-2" attributes="0"/>
               <EmptySpace type="unrelated" max="-2" attributes="0"/>
-              <Component id="jLabel45" min="-2" max="-2" attributes="0"/>
-              <EmptySpace min="-2" pref="25" max="-2" attributes="0"/>
-              <Group type="103" groupAlignment="3" attributes="0">
-                  <Component id="jLabel47" alignment="3" min="-2" max="-2" attributes="0"/>
-                  <Component id="Med_Records_Patient_History" alignment="3" min="-2" max="-2" attributes="0"/>
+              <Component id="jLabel45" min="-2" pref="23" max="-2" attributes="0"/>
+              <EmptySpace type="separate" max="-2" attributes="0"/>
+              <Group type="103" groupAlignment="0" max="-2" attributes="0">
+                  <Component id="txtRemarks" max="32767" attributes="0"/>
+                  <Component id="jLabel47" max="32767" attributes="0"/>
               </Group>
               <EmptySpace type="separate" max="-2" attributes="0"/>
               <Component id="jSeparator14" min="-2" max="-2" attributes="0"/>
-              <EmptySpace min="-2" pref="19" max="-2" attributes="0"/>
+              <EmptySpace type="separate" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="3" attributes="0">
-                  <Component id="jLabel48" alignment="3" min="-2" max="-2" attributes="0"/>
-                  <Component id="Allergy1__Patient_History" alignment="3" min="-2" max="-2" attributes="0"/>
-                  <Component id="jLabel49" alignment="3" min="-2" max="-2" attributes="0"/>
-                  <Component id="Allergy2_Patient_History" alignment="3" min="-2" max="-2" attributes="0"/>
-                  <Component id="jLabel50" alignment="3" min="-2" max="-2" attributes="0"/>
-                  <Component id="Allergy3_Patient_History" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="jLabel48" alignment="3" min="-2" pref="24" max="-2" attributes="0"/>
+                  <Component id="txtAllergy" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="jLabel50" alignment="3" min="-2" pref="23" max="-2" attributes="0"/>
+                  <Component id="txtTemp" alignment="3" min="-2" max="-2" attributes="0"/>
               </Group>
-              <EmptySpace min="-2" pref="46" max="-2" attributes="0"/>
+              <EmptySpace type="unrelated" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="0" attributes="0">
-                  <Component id="jSeparator16" min="-2" max="-2" attributes="0"/>
+                  <Group type="103" groupAlignment="1" max="-2" attributes="0">
+                      <Component id="jLabel49" alignment="1" max="32767" attributes="0"/>
+                      <Component id="txtHeartrate" alignment="0" min="-2" max="-2" attributes="0"/>
+                  </Group>
                   <Component id="Submit_Button_Patient_History" min="-2" max="-2" attributes="0"/>
               </Group>
-              <EmptySpace pref="27" max="32767" attributes="0"/>
-          </Group>
-          <Group type="103" rootIndex="1" groupAlignment="0" attributes="0">
-              <Group type="102" alignment="0" attributes="0">
-                  <EmptySpace max="-2" attributes="0"/>
-                  <Component id="jLabel19" min="-2" max="-2" attributes="0"/>
-                  <EmptySpace pref="341" max="32767" attributes="0"/>
-              </Group>
+              <EmptySpace min="-2" pref="10" max="-2" attributes="0"/>
+              <Component id="jSeparator16" min="-2" max="-2" attributes="0"/>
+              <EmptySpace min="-2" pref="165" max="-2" attributes="0"/>
           </Group>
       </Group>
     </DimensionLayout>
@@ -146,12 +157,12 @@
         <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
           <Font name="Rockwell" size="13" style="0"/>
         </Property>
-        <Property name="text" type="java.lang.String" value="Medical Records:"/>
+        <Property name="text" type="java.lang.String" value="Remarks"/>
       </Properties>
     </Component>
-    <Component class="javax.swing.JTextField" name="Med_Records_Patient_History">
+    <Component class="javax.swing.JTextField" name="txtRemarks">
       <Events>
-        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="Med_Records_Patient_HistoryActionPerformed"/>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="txtRemarksActionPerformed"/>
       </Events>
     </Component>
     <Component class="javax.swing.JLabel" name="jLabel48">
@@ -159,7 +170,7 @@
         <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
           <Font name="Rockwell" size="13" style="0"/>
         </Property>
-        <Property name="text" type="java.lang.String" value="Allergy 1:"/>
+        <Property name="text" type="java.lang.String" value="Allergy:"/>
       </Properties>
     </Component>
     <Component class="javax.swing.JLabel" name="jLabel19">
@@ -170,7 +181,7 @@
         <Property name="text" type="java.lang.String" value=" Medical History Details"/>
       </Properties>
     </Component>
-    <Component class="javax.swing.JTextField" name="Allergy1__Patient_History">
+    <Component class="javax.swing.JTextField" name="txtAllergy">
     </Component>
     <Component class="javax.swing.JSeparator" name="jSeparator5">
     </Component>
@@ -179,18 +190,10 @@
         <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
           <Font name="Rockwell" size="13" style="0"/>
         </Property>
-        <Property name="text" type="java.lang.String" value="Allergy 2:"/>
+        <Property name="text" type="java.lang.String" value="Heartrate"/>
       </Properties>
     </Component>
-    <Component class="javax.swing.JLabel" name="jLabel27">
-      <Properties>
-        <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-          <Font name="Rockwell" size="13" style="0"/>
-        </Property>
-        <Property name="text" type="java.lang.String" value="Medical Details for the Patient"/>
-      </Properties>
-    </Component>
-    <Component class="javax.swing.JTextField" name="Allergy2_Patient_History">
+    <Component class="javax.swing.JTextField" name="txtHeartrate">
     </Component>
     <Component class="javax.swing.JSeparator" name="jSeparator12">
     </Component>
@@ -199,7 +202,7 @@
         <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
           <Font name="Rockwell" size="13" style="0"/>
         </Property>
-        <Property name="text" type="java.lang.String" value="Allergy 3:"/>
+        <Property name="text" type="java.lang.String" value="Temperature"/>
       </Properties>
     </Component>
     <Component class="javax.swing.JLabel" name="jLabel28">
@@ -210,7 +213,7 @@
         <Property name="text" type="java.lang.String" value="Patient Name :"/>
       </Properties>
     </Component>
-    <Component class="javax.swing.JTextField" name="Allergy3_Patient_History">
+    <Component class="javax.swing.JTextField" name="txtTemp">
     </Component>
     <Component class="javax.swing.JButton" name="Submit_Button_Patient_History">
       <Properties>
@@ -223,14 +226,11 @@
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="Submit_Button_Patient_HistoryActionPerformed"/>
       </Events>
     </Component>
-    <Component class="java.awt.List" name="PatientNameList">
-      <Events>
-        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="PatientNameListActionPerformed"/>
-      </Events>
-    </Component>
     <Component class="javax.swing.JSeparator" name="jSeparator13">
     </Component>
     <Component class="javax.swing.JSeparator" name="jSeparator14">
+    </Component>
+    <Component class="java.awt.Choice" name="choicePatientName">
     </Component>
   </SubComponents>
 </Form>

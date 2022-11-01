@@ -5,6 +5,7 @@
 package ui;
 
 import model.Controller;
+import model.Person;
 
 /**
  *
@@ -15,10 +16,15 @@ public class PatientAfterLogin extends javax.swing.JFrame {
     /**
      * Creates new form DoctorAfterLogin
      */
+    static Person person;
     private static Controller system;
-    public PatientAfterLogin(Controller system ) {
+    public PatientAfterLogin(Controller system,Person p ) {
         initComponents();
         this.system=system;
+        this.person=p;
+        jLabelRole.setText(person.getRole().toString());
+        jLabelName.setText(person.getName());
+        jLabelUserName.setText(person.getuserName());
     }
 
     /**
@@ -41,19 +47,22 @@ public class PatientAfterLogin extends javax.swing.JFrame {
         jLabelRole = new javax.swing.JLabel();
         jButtonSearchHospital = new javax.swing.JButton();
         jButtonViewHistory = new javax.swing.JButton();
+        jButtonLogout = new javax.swing.JButton();
+        jLabel5 = new javax.swing.JLabel();
         jPanelRightPane = new javax.swing.JPanel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
-        jLabel1.setText("Details");
+        jPanelLeftPane.setBackground(new java.awt.Color(204, 255, 204));
 
-        jLabel2.setText("Name");
+        jLabel2.setText("Name :");
 
-        jLabel3.setText("Username");
+        jLabel3.setText("Username :");
 
-        jLabel4.setText("Role");
+        jLabel4.setText("Role :");
 
         jButtonSearchHospital.setText("Search Hospital");
+        jButtonSearchHospital.setBorder(javax.swing.BorderFactory.createEtchedBorder(java.awt.Color.cyan, java.awt.Color.gray));
         jButtonSearchHospital.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButtonSearchHospitalActionPerformed(evt);
@@ -61,11 +70,22 @@ public class PatientAfterLogin extends javax.swing.JFrame {
         });
 
         jButtonViewHistory.setText("View History");
+        jButtonViewHistory.setBorder(javax.swing.BorderFactory.createEtchedBorder(java.awt.Color.cyan, java.awt.Color.gray));
         jButtonViewHistory.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButtonViewHistoryActionPerformed(evt);
             }
         });
+
+        jButtonLogout.setText("Exit");
+        jButtonLogout.setBorder(javax.swing.BorderFactory.createEtchedBorder(java.awt.Color.cyan, java.awt.Color.gray));
+        jButtonLogout.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonLogoutActionPerformed(evt);
+            }
+        });
+
+        jLabel5.setIcon(new javax.swing.ImageIcon(getClass().getResource("/ui/user.png"))); // NOI18N
 
         javax.swing.GroupLayout jPanelLeftPaneLayout = new javax.swing.GroupLayout(jPanelLeftPane);
         jPanelLeftPane.setLayout(jPanelLeftPaneLayout);
@@ -77,25 +97,32 @@ public class PatientAfterLogin extends javax.swing.JFrame {
                         .addGap(23, 23, 23)
                         .addComponent(jLabel1))
                     .addGroup(jPanelLeftPaneLayout.createSequentialGroup()
-                        .addContainerGap()
-                        .addComponent(jLabel2)
-                        .addGap(18, 18, 18)
-                        .addComponent(jLabelName))
-                    .addGroup(jPanelLeftPaneLayout.createSequentialGroup()
-                        .addContainerGap()
-                        .addComponent(jLabel3)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jLabelUserName))
-                    .addGroup(jPanelLeftPaneLayout.createSequentialGroup()
-                        .addContainerGap()
-                        .addComponent(jLabel4)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addGap(44, 44, 44)
                         .addComponent(jLabelRole))
                     .addGroup(jPanelLeftPaneLayout.createSequentialGroup()
-                        .addGap(14, 14, 14)
-                        .addGroup(jPanelLeftPaneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(jButtonSearchHospital, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(jButtonViewHistory, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
+                        .addContainerGap()
+                        .addComponent(jLabel5)
+                        .addGap(18, 18, 18)
+                        .addGroup(jPanelLeftPaneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(jPanelLeftPaneLayout.createSequentialGroup()
+                                .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 84, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(jLabelUserName))
+                            .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 83, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 83, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addGroup(jPanelLeftPaneLayout.createSequentialGroup()
+                        .addGap(58, 58, 58)
+                        .addComponent(jLabelName)))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanelLeftPaneLayout.createSequentialGroup()
+                .addContainerGap(98, Short.MAX_VALUE)
+                .addGroup(jPanelLeftPaneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(jButtonViewHistory, javax.swing.GroupLayout.DEFAULT_SIZE, 122, Short.MAX_VALUE)
+                    .addComponent(jButtonSearchHospital, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGap(94, 94, 94))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanelLeftPaneLayout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jButtonLogout, javax.swing.GroupLayout.PREFERRED_SIZE, 108, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanelLeftPaneLayout.setVerticalGroup(
@@ -104,35 +131,44 @@ public class PatientAfterLogin extends javax.swing.JFrame {
                 .addGap(44, 44, 44)
                 .addComponent(jLabel1)
                 .addGap(27, 27, 27)
-                .addGroup(jPanelLeftPaneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel2)
-                    .addComponent(jLabelName))
+                .addComponent(jLabelName)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(jPanelLeftPaneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel3)
-                    .addComponent(jLabelUserName))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(jPanelLeftPaneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel4)
-                    .addComponent(jLabelRole))
-                .addGap(31, 31, 31)
+                .addGroup(jPanelLeftPaneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addGroup(jPanelLeftPaneLayout.createSequentialGroup()
+                        .addGroup(jPanelLeftPaneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addGroup(jPanelLeftPaneLayout.createSequentialGroup()
+                                .addComponent(jLabelUserName)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(jLabel5))
+                            .addComponent(jLabel2)
+                            .addGroup(jPanelLeftPaneLayout.createSequentialGroup()
+                                .addGap(30, 30, 30)
+                                .addComponent(jLabel3)))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(jLabelRole))
+                    .addComponent(jLabel4))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 151, Short.MAX_VALUE)
                 .addComponent(jButtonSearchHospital)
                 .addGap(18, 18, 18)
                 .addComponent(jButtonViewHistory)
-                .addContainerGap(190, Short.MAX_VALUE))
+                .addGap(35, 35, 35)
+                .addComponent(jButtonLogout)
+                .addGap(88, 88, 88))
         );
 
         jSplitPaneDoctor.setLeftComponent(jPanelLeftPane);
+
+        jPanelRightPane.setBackground(new java.awt.Color(255, 204, 204));
 
         javax.swing.GroupLayout jPanelRightPaneLayout = new javax.swing.GroupLayout(jPanelRightPane);
         jPanelRightPane.setLayout(jPanelRightPaneLayout);
         jPanelRightPaneLayout.setHorizontalGroup(
             jPanelRightPaneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 605, Short.MAX_VALUE)
+            .addGap(0, 674, Short.MAX_VALUE)
         );
         jPanelRightPaneLayout.setVerticalGroup(
             jPanelRightPaneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 448, Short.MAX_VALUE)
+            .addGap(0, 473, Short.MAX_VALUE)
         );
 
         jSplitPaneDoctor.setRightComponent(jPanelRightPane);
@@ -141,7 +177,7 @@ public class PatientAfterLogin extends javax.swing.JFrame {
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jSplitPaneDoctor, javax.swing.GroupLayout.DEFAULT_SIZE, 751, Short.MAX_VALUE)
+            .addComponent(jSplitPaneDoctor)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -153,15 +189,22 @@ public class PatientAfterLogin extends javax.swing.JFrame {
 
     private void jButtonSearchHospitalActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonSearchHospitalActionPerformed
         // TODO add your handling code here:
-        PatientRightSearchHospital prsh=new PatientRightSearchHospital();
+        PatientRightSearchHospital prsh=new PatientRightSearchHospital(system,person);
         jSplitPaneDoctor.setRightComponent(prsh);
     }//GEN-LAST:event_jButtonSearchHospitalActionPerformed
 
     private void jButtonViewHistoryActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonViewHistoryActionPerformed
         // TODO add your handling code here:
-        PatientRightSearchHospital prsh=new PatientRightSearchHospital();
-        jSplitPaneDoctor.setRightComponent(prsh);
+        PatientRightViewEncounter prve=new PatientRightViewEncounter(system,person);
+        jSplitPaneDoctor.setRightComponent(prve);
     }//GEN-LAST:event_jButtonViewHistoryActionPerformed
+
+    private void jButtonLogoutActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonLogoutActionPerformed
+        // TODO add your handling code here:
+        Landing l =  new Landing();
+        l.setVisible(true);
+        
+    }//GEN-LAST:event_jButtonLogoutActionPerformed
 
     /**
      * @param args the command line arguments
@@ -196,18 +239,20 @@ public class PatientAfterLogin extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new PatientAfterLogin(system).setVisible(true);
+                new PatientAfterLogin(system,person).setVisible(true);
             }
         });
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton jButtonLogout;
     private javax.swing.JButton jButtonSearchHospital;
     private javax.swing.JButton jButtonViewHistory;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
+    private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabelName;
     private javax.swing.JLabel jLabelRole;
     private javax.swing.JLabel jLabelUserName;

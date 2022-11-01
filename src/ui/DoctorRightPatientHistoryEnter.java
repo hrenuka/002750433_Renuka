@@ -4,17 +4,30 @@
  */
 package ui;
 
+import java.util.List;
+import javax.swing.JOptionPane;
+import model.Controller;
+import model.Patient;
+import model.PatientDirectory;
+import model.Person;
+import model.VitalRecord;
+
 /**
  *
- * @author kb282
+ * @author anujkumar
  */
 public class DoctorRightPatientHistoryEnter extends javax.swing.JPanel {
 
     /**
      * Creates new form PatientHistoryJPanel
      */
-    public DoctorRightPatientHistoryEnter() {
+    Controller system;
+    Person person;
+    public DoctorRightPatientHistoryEnter(Controller system,Person person) {
         initComponents();
+        this.system=system;
+        populateName(system);
+        this.person = person;
     }
 
     /**
@@ -29,49 +42,47 @@ public class DoctorRightPatientHistoryEnter extends javax.swing.JPanel {
         jSeparator16 = new javax.swing.JSeparator();
         jLabel45 = new javax.swing.JLabel();
         jLabel47 = new javax.swing.JLabel();
-        Med_Records_Patient_History = new javax.swing.JTextField();
+        txtRemarks = new javax.swing.JTextField();
         jLabel48 = new javax.swing.JLabel();
         jLabel19 = new javax.swing.JLabel();
-        Allergy1__Patient_History = new javax.swing.JTextField();
+        txtAllergy = new javax.swing.JTextField();
         jSeparator5 = new javax.swing.JSeparator();
         jLabel49 = new javax.swing.JLabel();
-        jLabel27 = new javax.swing.JLabel();
-        Allergy2_Patient_History = new javax.swing.JTextField();
+        txtHeartrate = new javax.swing.JTextField();
         jSeparator12 = new javax.swing.JSeparator();
         jLabel50 = new javax.swing.JLabel();
         jLabel28 = new javax.swing.JLabel();
-        Allergy3_Patient_History = new javax.swing.JTextField();
+        txtTemp = new javax.swing.JTextField();
         Submit_Button_Patient_History = new javax.swing.JButton();
-        PatientNameList = new java.awt.List();
         jSeparator13 = new javax.swing.JSeparator();
         jSeparator14 = new javax.swing.JSeparator();
+        choicePatientName = new java.awt.Choice();
+
+        setBackground(new java.awt.Color(255, 204, 204));
 
         jLabel45.setFont(new java.awt.Font("Rockwell", 1, 13)); // NOI18N
         jLabel45.setText("Medical Details");
 
         jLabel47.setFont(new java.awt.Font("Rockwell", 0, 13)); // NOI18N
-        jLabel47.setText("Medical Records:");
+        jLabel47.setText("Remarks");
 
-        Med_Records_Patient_History.addActionListener(new java.awt.event.ActionListener() {
+        txtRemarks.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                Med_Records_Patient_HistoryActionPerformed(evt);
+                txtRemarksActionPerformed(evt);
             }
         });
 
         jLabel48.setFont(new java.awt.Font("Rockwell", 0, 13)); // NOI18N
-        jLabel48.setText("Allergy 1:");
+        jLabel48.setText("Allergy:");
 
         jLabel19.setFont(new java.awt.Font("Rockwell", 0, 24)); // NOI18N
         jLabel19.setText(" Medical History Details");
 
         jLabel49.setFont(new java.awt.Font("Rockwell", 0, 13)); // NOI18N
-        jLabel49.setText("Allergy 2:");
-
-        jLabel27.setFont(new java.awt.Font("Rockwell", 0, 13)); // NOI18N
-        jLabel27.setText("Medical Details for the Patient");
+        jLabel49.setText("Heartrate");
 
         jLabel50.setFont(new java.awt.Font("Rockwell", 0, 13)); // NOI18N
-        jLabel50.setText("Allergy 3:");
+        jLabel50.setText("Temperature");
 
         jLabel28.setFont(new java.awt.Font("Rockwell", 0, 13)); // NOI18N
         jLabel28.setText("Patient Name :");
@@ -84,132 +95,159 @@ public class DoctorRightPatientHistoryEnter extends javax.swing.JPanel {
             }
         });
 
-        PatientNameList.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                PatientNameListActionPerformed(evt);
-            }
-        });
-
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addComponent(Submit_Button_Patient_History, javax.swing.GroupLayout.PREFERRED_SIZE, 825, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jSeparator16, javax.swing.GroupLayout.DEFAULT_SIZE, 13, Short.MAX_VALUE))
+                .addGap(831, 831, 831)
+                .addComponent(jSeparator16, javax.swing.GroupLayout.DEFAULT_SIZE, 44, Short.MAX_VALUE))
             .addGroup(layout.createSequentialGroup()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jSeparator13)
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(0, 0, Short.MAX_VALUE)
+                        .addContainerGap()
                         .addComponent(jLabel47)
-                        .addGap(18, 18, 18)
-                        .addComponent(Med_Records_Patient_History, javax.swing.GroupLayout.PREFERRED_SIZE, 700, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(8, 8, 8))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(txtRemarks, javax.swing.GroupLayout.PREFERRED_SIZE, 512, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(layout.createSequentialGroup()
                         .addContainerGap()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jSeparator12, javax.swing.GroupLayout.Alignment.TRAILING)
                             .addGroup(layout.createSequentialGroup()
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jLabel27)
                                     .addComponent(jLabel45)
                                     .addGroup(layout.createSequentialGroup()
                                         .addGap(6, 6, 6)
                                         .addComponent(jLabel28)
-                                        .addGap(35, 35, 35)
-                                        .addComponent(PatientNameList, javax.swing.GroupLayout.PREFERRED_SIZE, 189, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                        .addGap(20, 20, 20)
+                                        .addComponent(choicePatientName, javax.swing.GroupLayout.PREFERRED_SIZE, 149, javax.swing.GroupLayout.PREFERRED_SIZE)))
                                 .addGap(0, 0, Short.MAX_VALUE))))
                     .addComponent(jSeparator14)
-                    .addComponent(jSeparator5))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(277, 277, 277)
+                        .addComponent(jLabel19)
+                        .addGap(18, 18, 18)
+                        .addComponent(jSeparator5)))
                 .addContainerGap())
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jLabel48)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(Allergy1__Patient_History, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(26, 26, 26)
-                .addComponent(jLabel49)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel49)
+                    .addComponent(jLabel48))
                 .addGap(18, 18, 18)
-                .addComponent(Allergy2_Patient_History, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jLabel50)
-                .addGap(18, 18, 18)
-                .addComponent(Allergy3_Patient_History, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(txtAllergy, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(63, 63, 63)
+                        .addComponent(jLabel50)
+                        .addGap(18, 18, 18)
+                        .addComponent(txtTemp, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(txtHeartrate, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(120, 120, 120)
+                        .addComponent(Submit_Button_Patient_History, javax.swing.GroupLayout.PREFERRED_SIZE, 111, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addGap(0, 0, Short.MAX_VALUE))
-            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addGroup(layout.createSequentialGroup()
-                    .addGap(270, 270, 270)
-                    .addComponent(jLabel19)
-                    .addContainerGap(309, Short.MAX_VALUE)))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(36, 36, 36)
-                .addComponent(jSeparator5, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jLabel27)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jSeparator12, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel28)
-                    .addComponent(PatientNameList, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(36, 36, 36)
+                        .addComponent(jSeparator5, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(28, 28, 28))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addContainerGap()
+                        .addComponent(jLabel19, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)))
+                .addComponent(jSeparator12, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(choicePatientName, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel28, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 40, Short.MAX_VALUE)
                 .addComponent(jSeparator13, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jLabel45)
-                .addGap(25, 25, 25)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel47)
-                    .addComponent(Med_Records_Patient_History, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addComponent(jLabel45, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(txtRemarks)
+                    .addComponent(jLabel47, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addGap(18, 18, 18)
                 .addComponent(jSeparator14, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(19, 19, 19)
+                .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel48)
-                    .addComponent(Allergy1__Patient_History, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel49)
-                    .addComponent(Allergy2_Patient_History, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel50)
-                    .addComponent(Allergy3_Patient_History, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(46, 46, 46)
+                    .addComponent(jLabel48, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(txtAllergy, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel50, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(txtTemp, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jSeparator16, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                        .addComponent(jLabel49, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(txtHeartrate, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addComponent(Submit_Button_Patient_History))
-                .addContainerGap(27, Short.MAX_VALUE))
-            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addGroup(layout.createSequentialGroup()
-                    .addContainerGap()
-                    .addComponent(jLabel19)
-                    .addContainerGap(341, Short.MAX_VALUE)))
+                .addGap(10, 10, 10)
+                .addComponent(jSeparator16, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(165, 165, 165))
         );
     }// </editor-fold>//GEN-END:initComponents
 
-    private void Med_Records_Patient_HistoryActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Med_Records_Patient_HistoryActionPerformed
+    private void txtRemarksActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtRemarksActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_Med_Records_Patient_HistoryActionPerformed
+    }//GEN-LAST:event_txtRemarksActionPerformed
 
     private void Submit_Button_Patient_HistoryActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Submit_Button_Patient_HistoryActionPerformed
         // TODO add your handling code here:
+        String remarks=txtRemarks.getText();
+        String allergy=txtAllergy.getText();
+        int heartrate=Integer.parseInt(txtHeartrate.getText());
+        float temperature=Float.parseFloat(txtTemp.getText());
+        String name = choicePatientName.getSelectedItem();
+        int validate=validateInputFields(remarks,allergy,heartrate,temperature);
+        if (validate==1){
+        system.createEncounter(name, person.getuserName(), heartrate, temperature, remarks, allergy);
+        }
+        else{
+        System.out.println("Error in values");
+        }
+        
     }//GEN-LAST:event_Submit_Button_Patient_HistoryActionPerformed
-
-    private void PatientNameListActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_PatientNameListActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_PatientNameListActionPerformed
-
+    private int validateInputFields(String remarks,String allergy,int heartrate,float temperature) {
+        //Function to validate the input fields
+        int validated=1;
+        
+        if(remarks == null || remarks.isEmpty()){
+            JOptionPane.showMessageDialog(this,"Remark cannot be empty.");
+            validated=0;
+        }
+        else if(allergy == null || allergy.isEmpty()){
+            JOptionPane.showMessageDialog(this,"Allergy cannot be empty.");
+            validated=0;
+        }
+        else if(heartrate < 0){
+            JOptionPane.showMessageDialog(this,"Heartrate cannot be less than 0.");
+            validated=0;
+        }
+        else if(temperature < 0){
+            JOptionPane.showMessageDialog(this,"Temperature cannot be less than 0.");
+            validated=0;
+        }
+        return validated;
+    }
+    void populateName(Controller system){
+        PatientDirectory pd= system.getPatientDirectory();
+        List<Patient> patients=pd.getPatientDirectory();
+        for (Patient p : patients){
+               choicePatientName.add(p.getuserName());
+        }
+    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JTextField Allergy1__Patient_History;
-    private javax.swing.JTextField Allergy2_Patient_History;
-    private javax.swing.JTextField Allergy3_Patient_History;
-    private javax.swing.JTextField Med_Records_Patient_History;
-    private java.awt.List PatientNameList;
     private javax.swing.JButton Submit_Button_Patient_History;
+    private java.awt.Choice choicePatientName;
     private javax.swing.JLabel jLabel19;
-    private javax.swing.JLabel jLabel27;
     private javax.swing.JLabel jLabel28;
     private javax.swing.JLabel jLabel45;
     private javax.swing.JLabel jLabel47;
@@ -221,5 +259,9 @@ public class DoctorRightPatientHistoryEnter extends javax.swing.JPanel {
     private javax.swing.JSeparator jSeparator14;
     private javax.swing.JSeparator jSeparator16;
     private javax.swing.JSeparator jSeparator5;
+    private javax.swing.JTextField txtAllergy;
+    private javax.swing.JTextField txtHeartrate;
+    private javax.swing.JTextField txtRemarks;
+    private javax.swing.JTextField txtTemp;
     // End of variables declaration//GEN-END:variables
 }

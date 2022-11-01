@@ -9,7 +9,7 @@ import java.util.List;
 
 /**
  *
- * @author visha_wb3uzfg
+ * @author renuka
  */
 public class VitalRecord {
     
@@ -23,6 +23,7 @@ public class VitalRecord {
         this.heartrate = heartrate;
         this.temperature = temperature;
         this.remarks = remarks;
+        this.allergies=allergies;
     }
     
     public String getAllergies() {
